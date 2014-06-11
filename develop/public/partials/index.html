@@ -1,0 +1,22 @@
+<div ng-controller="BookController as BookCtrl">
+  <h1>Bootstrap starter template</h1>
+  <button class="btn btn-default" ng-click="bookFormCtrl.showForm = !bookFormCtrl.showForm">{{bookFormCtrl.showForm? "Cancel" : "Create Book" }}</button>
+  <book-form ng-show="bookFormCtrl.showForm"></book-form>
+  <hr />
+  <table class="table table-condensed table-bordered">
+    <thead>
+      <tr>
+        <th>Book Name</th>
+        <th>Show</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="book in BookCtrl.books">
+        <td>{{book.title}}</td>
+        <td>test</td>
+        <td>test</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

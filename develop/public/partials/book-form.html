@@ -1,0 +1,7 @@
+<form role="form" name="bookForm" ng-submit="bookFormCtrl.addBook(bookForm)">
+  <div class="form-group">
+    <label for="book_title">Book Title</label>
+    <input type="text" class="form-control" ng-model="bookFormCtrl.book.title" id="book_title" placeholder="Enter book title">
+  </div>
+  <button type="submit" class="btn btn-success">Save book</button>
+</form>
