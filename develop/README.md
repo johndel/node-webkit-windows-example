@@ -5,3 +5,7 @@ A basic template for having an app where it will play automatically without inte
 I am going to add indexedDB as a storage and angular for something simple. I may add import / export of the indexedDB stored objects for having a backup.
 
 My goal is to prove how I can replace some old desktop apps where their main thing is some common CRUD and basic functionality "logistic-like" programs.
+
+# Conclusion
+
+I think I proved that it can be done (run from the develop folder, the app.js and play with the app). The basic problem is that I have to create a really better import/export mechanism otherwise as the app starts to becomes bigger and bigger, I'll have to define the tables for import/export etc.

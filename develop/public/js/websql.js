@@ -1,16 +1,8 @@
-var db = openDatabase('mydb', '1.0', 'Test DB', 10 * 1024 * 1024);
+var db = WebSQL('mydb');
 var books = [];
 
-db.transaction(function (tx) {
+db.rawTx(function (tx) {
   tx.executeSql('CREATE TABLE IF NOT EXISTS books (id INTEGER PRIMARY KEY, title VARCHAR(50))');
-});
-
-
-$("#import").on("click", function() {
-  db.transaction(function (tx) {
-    tx.executeSql('INSERT INTO books (id, title) VALUES (1, "Rails 4 Way")');
-    tx.executeSql('INSERT INTO books (id, title) VALUES (2, "Unity by example")');
-  });
 });
 
 $("#export").on("click", function() {
@@ -18,21 +10,39 @@ $("#export").on("click", function() {
 });
 
 $("#clean_data").on("click", function() {
-  db.transaction(function (tx) {
-    tx.executeSql('DROP TABLE books');
-  });
-  db.transaction(function (tx) {
-    tx.executeSql('CREATE TABLE IF NOT EXISTS books (id unique, title)');
+  db.query(
+    'DROP TABLE books',
+    'CREATE TABLE IF NOT EXISTS books (id unique, title)'
+  ).done(function() {
+    alert("Database data wiped out.");
   });
 });
 
 function bookToJson() {
+  db.query('SELECT * FROM books').done(function(results) {
+    for(i = 0; i < results.length; i++) {
+      books.push({id: results[i].id, title: results[i].title});
+    }
+  });
+  return books;
+}
+
+function stringifyJson(json) {
+  var returned_objects = JSON.stringify(json);
+  return returned_objects;
+}
+
+function stringifyBooks() {
+  var returned_objects = "[";
   db.transaction(function (tx) {
     tx.executeSql('SELECT * FROM books;', [], function(ty, results) {
       for(i = 0; i < results.rows.length; i++) {
-        books.push({id: results.rows.item(i).id, title: results.rows.item(i).title});
+
+        console.log(returned_objects);
+        returned_objects += "test"; //"{id: " + results.rows.item(i).id + ", title: " + results.rows.item(i).title + "}";
       }
     });
   });
-  return books;
+  returned_objects += "]";
+  return returned_objects;
 }

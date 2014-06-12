@@ -15,12 +15,14 @@
         this.book = {};
         this.addBook = function(form) {
         var tmp_book = this.book.title;
-        db.transaction(function (tx) {
-          tx.executeSql('SELECT MAX(id) as id FROM books;', [], function(ty, results) {
-            var new_id = parseInt(results.rows.item(0).id) + 1;
-            tx.executeSql('INSERT INTO books (id, title) VALUES (' + new_id + ', "' + tmp_book + '")');
-            books.push({id: new_id, title: tmp_book});
-          });
+        db.query('SELECT MAX(id) as id FROM books').done(function(result) {
+          if(parseInt(result[0].id)) {
+            var new_id = parseInt(result[0].id) + 1;
+          } else {
+            var new_id = 1;
+          }
+          db.query('INSERT INTO books (id, title) VALUES (' + new_id + ', "' + tmp_book + '")');
+          books.push({id: new_id, title: tmp_book});
         });
         this.book = {};
         this.showForm = false;
