@@ -6,6 +6,19 @@ db.rawTx(function (tx) {
 });
 
 $("#export").on("click", function() {
+  // db.query('SELECT name FROM sqlite_master WHERE type = "table"').done(function(results) {
+  //   console.log(results[1].name);
+  //   console.log(results.length);
+  // });
+
+  db.query('SELECT * from books').done(function(results) {
+    console.log("test");
+    console.log(results[0]);
+    $.map(results[0], function(value, key) {
+      console.log(key);
+    });
+  });
+
 
 });
 
