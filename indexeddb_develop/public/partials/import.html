@@ -1,0 +1,68 @@
+<h1>Download backup</h1>
+
+<p id="downloadify">
+  You must have Flash 10 installed to download this file.
+</p>
+
+<script type="text/javascript">
+  // Downloadify.create('downloadify',{
+  //   filename: function(){
+  //     return "backup_" + dateTime + ".txt";;
+  //   },
+  //   data: function(){
+  //     return document.getElementById('data').value;
+  //   },
+  //   onComplete: function(){
+  //     alert('Your File Has Been Saved!');
+  //   },
+  //   onCancel: function(){
+  //     alert('You have cancelled the saving of this file.');
+  //   },
+  //   onError: function(){
+  //     alert('You must put something in the File Contents or there will be nothing to save!');
+  //   },
+  //   transparent: false,
+  //   swf: 'media/downloadify.swf',
+  //   downloadImage: 'media/download.png',
+  //   width: 100,
+  //   height: 30,
+  //   transparent: true,
+  //   append: false
+  // });
+
+
+  Downloadify.create('downloadify',{
+    filename: function(){
+      var now     = new Date();
+      var year    = now.getFullYear();
+      var month   = now.getMonth()+1;
+      var day     = now.getDate();
+      var dateTime = year+'-'+month+'-'+day;
+      return "backup_" + dateTime + ".txt";
+      // return document.getElementById('filename').value;
+    },
+    data: function(){
+      // return_objects = "[";
+      // db.transaction(function (tx) {
+      //   tx.executeSql('SELECT * FROM books;', [], function(ty, results) {
+      //     for(i = 0; i < results.rows.length; i++) {
+      //       return_objects += "{id: " + results.rows.item(i).id + ", title: " + results.rows.item(i).title + "}";
+      //     }
+      //   });
+      // });
+      // return_objects += "]";
+      return returned_objects;
+    },
+    onComplete: function(){ alert('Your File Has Been Saved!'); },
+    // onCancel: function(){ alert('You have cancelled the saving of this file.'); },
+    onError: function(){ alert('You must put something in the File Contents or there will be nothing to save!'); },
+    transparent: false,
+    swf: 'media/downloadify.swf',
+    downloadImage: 'media/download.png',
+    width: 120,
+    height: 30,
+    transparent: true,
+    append: false
+  });
+</script>
+
